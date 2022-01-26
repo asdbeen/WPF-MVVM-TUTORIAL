@@ -15,9 +15,13 @@ namespace Res.Models
             _reservations = new List<Reservation>();
         }
 
-        public IEnumerable<Reservation> GetReservationsForUser(string username)
+        /// <summary>
+        /// Get all reservation.
+        /// </summary>
+        /// <returns>All reservation in the reservation book.</returns>
+        public IEnumerable<Reservation> GetReservations()
         {
-            return _reservations.Where(r => r.Username == username);
+            return _reservations;
         }
 
         public void AddReservation(Reservation reservation)

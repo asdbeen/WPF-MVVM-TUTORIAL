@@ -42,7 +42,7 @@ namespace Res
 
             
 
-            IEnumerable<Reservation> reservations = hotel.GetReservationsForUser("czb");
+            IEnumerable<Reservation> reservations = hotel.GetReservations("czb");
 
             base.OnStartup(e);
         }

@@ -24,9 +24,9 @@ namespace Res.Models
         /// </summary>
         /// <param name="username"> The username of the user. </param>
         /// <returns>The reservations for the user. </returns>
-        public IEnumerable<Reservation> GetReservationsForUser(string username)
+        public IEnumerable<Reservation> GetReservations(string v)
         {
-            return _reservationBook.GetReservationsForUser(username);
+            return _reservationBook.GetReservations();
         }
 
         /// <summary>
