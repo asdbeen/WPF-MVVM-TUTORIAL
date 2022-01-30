@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Res.Models;
 using Res.Exceptions;
+using Res.ViewModels;
 
 namespace Res
 {
@@ -18,31 +19,38 @@ namespace Res
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Hotel hotel = new Hotel("ASD Suites");
+            //Hotel hotel = new Hotel("ASD Suites");
 
-            try
+            //try
+            //{
+            //    hotel.MakeReservation(new Reservation(
+            //    new RoomID(1, 3),
+            //    "czb",
+            //    new DateTime(2000, 1, 1),
+            //    new DateTime(2000, 1, 2)));
+
+
+            //    hotel.MakeReservation(new Reservation(
+            //        new RoomID(1, 3),
+            //        "czb",
+            //        new DateTime(2000, 1, 3),
+            //        new DateTime(2000, 1, 4)));
+            //}
+            //catch (ReservationConflictException ex)
+            //{
+
+            //}
+
+
+
+            //IEnumerable<Reservation> reservations = hotel.GetReservations("czb");
+
+            MainWindow = new MainWindow()
             {
-                hotel.MakeReservation(new Reservation(
-                new RoomID(1, 3),
-                "czb",
-                new DateTime(2000, 1, 1),
-                new DateTime(2000, 1, 2)));
+                DataContext = new MainViewModel()
+            };
 
-
-                hotel.MakeReservation(new Reservation(
-                    new RoomID(1, 3),
-                    "czb",
-                    new DateTime(2000, 1, 3),
-                    new DateTime(2000, 1, 4)));
-            }
-            catch (ReservationConflictException ex)
-            {
-               
-            }
-
-            
-
-            IEnumerable<Reservation> reservations = hotel.GetReservations("czb");
+            MainWindow.Show();
 
             base.OnStartup(e);
         }

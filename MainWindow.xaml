@@ -12,6 +12,6 @@
         FontSize="14"
         mc:Ignorable="d">
     <Grid Margin="20 10" MaxWidth="600">
-        <views:ReservationListingView/>
+        <views:ReservationListingView DataContext="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

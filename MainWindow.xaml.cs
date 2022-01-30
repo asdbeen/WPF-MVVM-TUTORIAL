@@ -23,6 +23,7 @@ namespace Res
         public MainWindow()
         {
             InitializeComponent();
+            
         }
     }
 }
