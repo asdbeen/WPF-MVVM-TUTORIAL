@@ -5,24 +5,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Collections.ObjectModel;
+using System.Collections.ObjectModel; 
+using Res.Commands;
+using Res.Stores;
+using Res.Services;
+using Res.Models;
 
 namespace Res.ViewModels
 {
     public class ReservationListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<ReservationViewModel> _reservations;
-
+        private readonly Hotel _hotel;
         public IEnumerable<ReservationViewModel> Reservations => _reservations;
-        public ICommand MakeReservationComand { get; }
+        public ICommand MakeReservationCommand { get; }
 
-        public ReservationListingViewModel()
+        public ReservationListingViewModel( Hotel hotel, NavigationService makeReservationNavigationService)
         {
+            _hotel = hotel;
             _reservations = new ObservableCollection<ReservationViewModel>();
 
-            _reservations.Add(new ReservationViewModel(new Reservation(new RoomID(1, 2), "czb1", DateTime.Now,DateTime.Now)));
-            _reservations.Add(new ReservationViewModel(new Reservation(new RoomID(3, 2), "czb2", DateTime.Now, DateTime.Now)));
-            _reservations.Add(new ReservationViewModel(new Reservation(new RoomID(2, 4), "czb3", DateTime.Now, DateTime.Now)));
+            MakeReservationCommand = new NavigateCommand(makeReservationNavigationService);
+
+            UpdateReservations();
+        
+        }
+
+        private void UpdateReservations()
+        {
+            _reservations.Clear();
+
+            foreach (Reservation reservation in _hotel.GetAllReservations())
+            {
+                ReservationViewModel reservationViewModel = new ReservationViewModel(reservation);
+                _reservations.Add(reservationViewModel);
+            }
         }
     }
 }

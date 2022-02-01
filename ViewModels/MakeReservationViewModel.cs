@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Res.Commands;
+using Res.Models;
+using Res.Services;
+using Res.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,24 +63,7 @@ namespace Res.ViewModels
             }
         }
 
-
-        private DateTime _endDate;
-
-        public DateTime EndDate
-        {
-            get
-            {
-                return _endDate;
-            }
-
-            set
-            {
-                _endDate = value;
-                OnPropertyChanged(nameof(EndDate));
-            }
-        }
-
-        private DateTime _startDate;
+        private DateTime _startDate = new DateTime(2021,1,1);
 
         public DateTime StartDate
         {
@@ -92,6 +79,24 @@ namespace Res.ViewModels
             }
         }
 
+        private DateTime _endDate = new DateTime(2021, 1, 8);
+
+        public DateTime EndDate
+        {
+            get
+            {
+                return _endDate;
+            }
+
+            set
+            {
+                _endDate = value;
+                OnPropertyChanged(nameof(EndDate));
+            }
+        }
+
+        
+
 
         public ICommand SubmitCommand { get; }
 
@@ -99,9 +104,12 @@ namespace Res.ViewModels
 
 
 
-        public MakeReservationViewModel()
+        public MakeReservationViewModel(Hotel hotel,NavigationService reservationViewNavigationService)
         {
+            SubmitCommand = new MakeReservationCommand(this,hotel,reservationViewNavigationService);
+            //CancelCommand = new CancelMakeReservationCommand();
 
+            CancelCommand = new NavigateCommand(reservationViewNavigationService);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Res.Models
         /// Get all reservation.
         /// </summary>
         /// <returns>All reservation in the reservation book.</returns>
-        public IEnumerable<Reservation> GetReservations()
+        public IEnumerable<Reservation> GetAllReservations()
         {
             return _reservations;
         }
@@ -30,7 +30,7 @@ namespace Res.Models
             {
                 if(existingReversation.Conflicts(reservation))
                 {
-                    throw new ReservationConflictException(existingReversation,reservation);
+                    throw new ReservationConflictException(existingReversation, reservation);
 
                 }
             }
