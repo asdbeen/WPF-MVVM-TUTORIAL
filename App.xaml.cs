@@ -10,6 +10,8 @@ using Res.Exceptions;
 using Res.ViewModels;
 using Res.Stores;
 using Res.Services;
+using Microsoft.EntityFrameworkCore;
+using Res.DbContexts;
 
 namespace Res
 {
@@ -18,6 +20,7 @@ namespace Res
     /// </summary>
     public partial class App : Application
     {
+        private const string CONNECTION_STRING = "Data Source = res.db";
         private readonly Hotel _hotel;
         private readonly NavigationStore _navigationStore;
         public App()
@@ -27,33 +30,12 @@ namespace Res
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            //Hotel hotel = new Hotel("ASD Suites");
+            DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(CONNECTION_STRING).Options;
+            using (ResDbContext dbContext = new ResDbContext(options))
+            { dbContext.Database.Migrate(); }
+            
 
-            //try
-            //{
-            //    hotel.MakeReservation(new Reservation(
-            //    new RoomID(1, 3),
-            //    "czb",
-            //    new DateTime(2000, 1, 1),
-            //    new DateTime(2000, 1, 2)));
-
-
-            //    hotel.MakeReservation(new Reservation(
-            //        new RoomID(1, 3),
-            //        "czb",
-            //        new DateTime(2000, 1, 3),
-            //        new DateTime(2000, 1, 4)));
-            //}
-            //catch (ReservationConflictException ex)
-            //{
-
-            //}
-
-
-
-            //IEnumerable<Reservation> reservations = hotel.GetReservations("czb");
-
-            _navigationStore.CurrentViewModel = CreateMakeReservationViewModel();
+            _navigationStore.CurrentViewModel = CreateReservationViewModel();
 
             MainWindow = new MainWindow()
             {

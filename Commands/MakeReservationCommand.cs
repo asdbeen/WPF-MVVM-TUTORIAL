@@ -24,7 +24,7 @@ namespace Res.Commands
         {
             _makeReservationViewModel = makeReservationViewModel;
             _hotel = hotel;
-
+            _reservationViewNavigationService = reservationViewNavigationService;
             _makeReservationViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
