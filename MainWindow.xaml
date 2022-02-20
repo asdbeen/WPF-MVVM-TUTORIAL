@@ -12,22 +12,22 @@
         Width="800"
         FontSize="14"
         mc:Ignorable="d">
-    
-    <Grid Margin="20 10" MaxWidth="600">
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type vms:MakeReservationViewModel}">
-                <views:MakeReservationView />
-            </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:ReservationListingViewModel}">
-                <views:ReservationListingView/>
-            </DataTemplate>
-        </Grid.Resources>
+    <ScrollViewer>
+        <Grid Margin="20 10" MaxWidth="600">
+            <Grid.Resources>
+                <DataTemplate DataType="{x:Type vms:MakeReservationViewModel}">
+                    <views:MakeReservationView />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type vms:ReservationListingViewModel}">
+                    <views:ReservationListingView/>
+                </DataTemplate>
+            </Grid.Resources>
 
 
-        <!--<views:MakeReservationView DataContext="{Binding CurrentViewModel}"/>-->
+            <ContentControl Content="{Binding CurrentViewModel}"/>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
-        
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Window>

@@ -24,5 +24,10 @@ namespace Res.Views
         {
             InitializeComponent();
         }
+
+        private void MakeReservationView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

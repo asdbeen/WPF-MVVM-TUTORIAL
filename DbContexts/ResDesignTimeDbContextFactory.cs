@@ -10,6 +10,7 @@ namespace Res.DbContexts
 {
     public class ResDesignTimeDbContextFactory : IDesignTimeDbContextFactory<ResDbContext>
     {
+
         public ResDbContext CreateDbContext(string[] args)
         {
             DbContextOptions options = new DbContextOptionsBuilder().UseSqlite("Data Source = res.db").Options;

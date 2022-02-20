@@ -104,10 +104,10 @@ namespace Res.ViewModels
 
 
 
-        public MakeReservationViewModel(Hotel hotel,NavigationService reservationViewNavigationService)
+        public MakeReservationViewModel(HotelStore hotelstore,NavigationService reservationViewNavigationService)
         {
-            SubmitCommand = new MakeReservationCommand(this,hotel,reservationViewNavigationService);
-            //CancelCommand = new CancelMakeReservationCommand();
+            SubmitCommand = new MakeReservationCommand(this, hotelstore, reservationViewNavigationService);
+            
 
             CancelCommand = new NavigateCommand(reservationViewNavigationService);
         }

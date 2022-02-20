@@ -12,6 +12,9 @@ using Res.Stores;
 using Res.Services;
 using Microsoft.EntityFrameworkCore;
 using Res.DbContexts;
+using Res.Services.ReservationProviders;
+using Res.Services.ReservationCreators;
+using Res.Services.ReservationConflictValidators;
 
 namespace Res
 {
@@ -22,10 +25,22 @@ namespace Res
     {
         private const string CONNECTION_STRING = "Data Source = res.db";
         private readonly Hotel _hotel;
+        private readonly HotelStore _hotelStore;
         private readonly NavigationStore _navigationStore;
+        private readonly ResDbContextFactory _resDbContextFactory;
         public App()
+
         {
-            _hotel = new Hotel("ASD Suites");
+            _resDbContextFactory = new ResDbContextFactory(CONNECTION_STRING);
+            IReservationProvider reservationProvider = new DatabaseReservationProvider(_resDbContextFactory);
+            IReservationCreator reservationCreator = new DatabaseReservationCreator(_resDbContextFactory);
+            IReservationConflictValidator reservationConflictValidator = new DatabaseReservationConflictValidator(_resDbContextFactory);
+
+
+
+            ReservationBook reservationBook = new ReservationBook(reservationProvider,reservationCreator,reservationConflictValidator);
+            _hotel = new Hotel("ASD Suites",reservationBook);
+            _hotelStore = new HotelStore(_hotel);
             _navigationStore = new NavigationStore();
         }
         protected override void OnStartup(StartupEventArgs e)
@@ -49,12 +64,12 @@ namespace Res
 
         private MakeReservationViewModel CreateMakeReservationViewModel()
         {
-            return new MakeReservationViewModel(_hotel, new NavigationService(_navigationStore, CreateReservationViewModel));
+            return new MakeReservationViewModel(_hotelStore, new NavigationService(_navigationStore, CreateReservationViewModel));
         }
 
         private ReservationListingViewModel CreateReservationViewModel()
         {
-            return new ReservationListingViewModel(_hotel, new NavigationService(_navigationStore, CreateMakeReservationViewModel));
+            return ReservationListingViewModel.LoadViewModel(_hotelStore,CreateMakeReservationViewModel(),new NavigationService(_navigationStore, CreateMakeReservationViewModel));
         }
 
     }

@@ -18,8 +18,8 @@ namespace Res.DTOs
 
         public string Username { get; set; }
 
-        public DateTime StartTime { get; }
+        public DateTime StartTime { get; set; }
 
-        public DateTime EndTime { get; }
+        public DateTime EndTime { get; set; }
     }
 }

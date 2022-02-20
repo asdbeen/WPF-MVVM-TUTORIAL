@@ -11,7 +11,7 @@ using Res.DbContexts;
 namespace Res.Migrations
 {
     [DbContext(typeof(ResDbContext))]
-    [Migration("20220209144833_Initial")]
+    [Migration("20220220080455_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,11 +25,17 @@ namespace Res.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("FloorNumber")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RoomNumber")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
                         .IsRequired()

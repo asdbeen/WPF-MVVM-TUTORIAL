@@ -23,11 +23,17 @@ namespace Res.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("FloorNumber")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RoomNumber")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
                         .IsRequired()
